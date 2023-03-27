@@ -1,0 +1,38 @@
+create database store;
+use store;
+create table category(
+    id_category int not null auto_increment primary key,
+    nameCategory VARCHAR(200) not null
+);
+
+create table products(
+    id_product int not null auto_increment primary key,
+    nameProduct VARCHAR(255) not null,
+    price int not null default 0,
+    totalMoney int not null,
+    descriptionproduct VARCHAR(255) not null,
+    id_category int not null,
+    foreign key (id_category) REFERENCES category(id_category)
+);
+
+create table customer (
+    id_customer int not null primary key auto_increment,
+    age int not null,
+    phoneNumber int not null,
+    adress VARCHAR(250) not null
+);
+
+create table bill(
+    id_bill int not null  auto_increment primary key,
+    timeBuy datetime not null,
+    totalMoney int not null,
+    id_customer int not null,
+    FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
+);
+
+create table productsbill(
+    id_bill int not null,
+    FOREIGN KEY (id_bill) REFERENCES bill(id_bill),
+    id_product int not null,
+    FOREIGN KEY (id_product) REFERENCES products(id_product)
+);
